@@ -25,7 +25,7 @@ jobs:
       # 확인 or 단위테스트 (생략)
       - name: 확인 검증
         # 여러개 명령어 작동 시 -> | 를 통해서 배치
-        run:
+        run: |
           pwd
           ls -al
           cat main.py
@@ -48,3 +48,24 @@ jobs:
           source: .
           # ubuntu os가 세팅된 ec2서버의 /home/ubuntu/projects/*.* 복사
           target: "/home/ubuntu/projects"
+
+        # 시크 변수에는 한경변수 (.env <- git 업로드 x )에 들어가는 내용들을 담을 수도 있음
+        # 개별 사항을 세팅 or yml 에서 설정 or 동적으로 .env 만들어서 배포등등 가능
+
+        # 남은 사항 => 서비스 재가동 명령 전달!!
+        # EC2 서버에 배포 작동에 관련된 스크립트 작동
+      - name: Run script And Service Restart
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_KEY }}
+          port: 22
+          scripts: | 
+            # 1. 프로젝트 폴더 위치로 이동
+            # cd /home/ubuntu/projects
+            # 2. 가상환경에 추가된 패키지가 있다면
+            # ./web/bin/pip install -r requirements.txt
+
+            # 3. 서비스 재가동
+            sudo systemctl restart hello.servies
