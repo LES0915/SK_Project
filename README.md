@@ -1,12 +1,8 @@
 # SK_Project
 git 사용 연습
 
-# usage
-```
-    uvicorn main:app --reload
-```
-
 # 구조
+```
 SK_project/
 │
 ├── main.py
@@ -19,3 +15,4 @@ SK_project/
     │   └── *.css
     └── js
         └── *.js
+```
