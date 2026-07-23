@@ -61,7 +61,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_KEY }}
           port: 22
-          scripts: | 
+          script: | 
             # 1. 프로젝트 폴더 위치로 이동
             # cd /home/ubuntu/projects
             # 2. 가상환경에 추가된 패키지가 있다면
